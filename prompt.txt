@@ -1,0 +1,12 @@
+Crée le dockerfile.
+
+Écrit un fichier markdown qui contient les dépendances et les versions installées.
+Tu peux ajouter toute information que tu juges pertinente
+
+Ajoute un fichier qui permet de tester que l'installation fonctionne bien. J'aimerais
+que ça soit un fichier js qui utilise mapnik (le plus simplement possible)
+
+Ajoute aussi un autre script.js qui démontre les fonctionnalités intéressantes
+
+
+
