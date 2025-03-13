@@ -1,0 +1,35 @@
+FROM node:16-bullseye
+
+# Installation des dépendances nécessaires
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libmapnik-dev \
+    mapnik-utils \
+    libboost-all-dev \
+    libcairo2-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libtiff-dev \
+    libwebp-dev \
+    libproj-dev \
+    libharfbuzz-dev \
+    libicu-dev \
+    libfreetype6-dev \
+    libxml2-dev
+
+WORKDIR /app
+
+# Créer un package.json simple
+RUN echo '{"name":"mapnik-test","version":"1.0.0","dependencies":{"@mapnik/mapnik":"^4.5.9"}}' > package.json
+
+# Installer mapnik via npm
+RUN npm install --build-from-source
+
+# Copier le script de test
+COPY test.js /app/
+
+# Modifier le chemin d'importation dans test.js
+RUN sed -i 's|"./lib/mapnik"|"@mapnik/mapnik"|g' /app/test.js
+
+# Point d'entrée par défaut
+CMD ["node", "test.js"]
