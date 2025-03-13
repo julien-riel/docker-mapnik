@@ -1,0 +1,15 @@
+{
+  "name": "docker-mapnik",
+  "version": "1.0.0",
+  "description": "Environnement Docker avec Node.js et Mapnik",
+  "main": "test-mapnik.js",
+  "scripts": {
+    "test": "node test-mapnik.js",
+    "demo": "node mapnik-demo.js"
+  },
+  "dependencies": {
+    "mapnik": "^4.5.9"
+  },
+  "author": "",
+  "license": "MIT"
+}
