@@ -9,7 +9,7 @@ Ce document liste les principales dépendances et leurs versions pour l'environn
 
 ## Package Node.js
 
-- **mapnik**: dernière version disponible via npm
+- **mapnik**: 4.0.0 (confirmé lors de l'exécution)
 
 ## Dépendances système principales
 
