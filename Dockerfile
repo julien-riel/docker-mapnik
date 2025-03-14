@@ -39,9 +39,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install mapnik
 
-# Copie des scripts de test
-COPY test-mapnik.js .
-COPY mapnik-demo.js .
+# Copie du code source
+COPY src/ src/
 
 # Commande par défaut
-CMD ["node", "test-mapnik.js"]
+CMD ["node", "src/test-mapnik.js"]
