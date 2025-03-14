@@ -5,10 +5,13 @@
   "main": "test-mapnik.js",
   "scripts": {
     "test": "node test-mapnik.js",
-    "demo": "node mapnik-demo.js"
+    "demo": "node mapnik-demo.js",
+    "start": "node src/tile-server/server.js"
   },
   "dependencies": {
-    "mapnik": "^4.5.9"
+    "mapnik": "^4.5.9",
+    "express": "^4.18.2",
+    "pg": "^8.11.3"
   },
   "author": "",
   "license": "MIT"
