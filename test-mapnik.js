@@ -11,7 +11,12 @@ console.log("Version de Node:", process.versions.node);
 
 // Vérifier les plugins chargés
 console.log("\nPlugins d'entrée chargés:");
-console.log("Polices disponibles :");
+mapnik.datasources().forEach((plugin) => console.log(` - ${plugin}`));
+
+mapnik.register_default_fonts();
+console.log(Object.keys(mapnik));
+
+console.log("Polices disponibles :", mapnik.fontFiles());
 mapnik.fonts().forEach((font) => console.log(` - ${font}`));
 
 // Créer une carte vide pour vérifier que la création d'objet fonctionne
