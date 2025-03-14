@@ -21,6 +21,15 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     libxml2-dev \
     git \
+    unzip
+
+# Installatoin des polices de caractères.
+# Utiliser les zip de Google fonts
+# https://fonts.google.com/download?family=Open+Sans
+COPY fonts/* /tmp/fonts/
+RUN unzip /tmp/fonts/Open_Sans.zip -d /tmp/fonts/open-sans \
+    && mkdir -p /usr/share/fonts/truetype/open-sans/ \
+    && cp /tmp/fonts/open-sans/static/*.ttf /usr/share/fonts/truetype/open-sans/ \
     && rm -rf /var/lib/apt/lists/*
 
 # Création du répertoire de travail
