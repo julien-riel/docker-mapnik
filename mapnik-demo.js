@@ -70,11 +70,10 @@ function createPointMap() {
     ],
   };
 
-  // Créer un objet de fonctionnalités à partir du GeoJSON
-  const featureSet = new mapnik.FeatureSet();
-  geoJSON.features.forEach((feature) => {
-    const feat = new mapnik.Feature.fromJSON(JSON.stringify(feature));
-    featureSet.add(feat);
+  // Créer un MemoryDatasource et ajouter les features directement
+  const memoryDatasource = new mapnik.Datasource({
+    type: "geojson",
+    inline: JSON.stringify(geoJSON),
   });
 
   // Créer une carte
@@ -94,9 +93,6 @@ function createPointMap() {
   map.fromStringSync(s);
 
   // Créer une source de données et une couche
-  const memoryDatasource = new mapnik.MemoryDatasource();
-  memoryDatasource.add(featureSet);
-
   const layer = new mapnik.Layer("points");
   layer.srs = map.srs;
   layer.styles = ["points"];
@@ -136,6 +132,7 @@ function generateDifferentFormats() {
   // Rectangle comme exemple
   const geojson = {
     type: "Feature",
+    properties: {},
     geometry: {
       type: "Polygon",
       coordinates: [
@@ -150,13 +147,10 @@ function generateDifferentFormats() {
     },
   };
 
-  // Ajouter le rectangle à la carte
-  const feature = new mapnik.Feature.fromJSON(JSON.stringify(geojson));
-  const featureSet = new mapnik.FeatureSet();
-  featureSet.add(feature);
-
-  const memoryDatasource = new mapnik.MemoryDatasource();
-  memoryDatasource.add(featureSet);
+  const memoryDatasource = new mapnik.Datasource({
+    type: "geojson",
+    inline: JSON.stringify({ type: "FeatureCollection", features: [geojson] }),
+  });
 
   const layer = new mapnik.Layer("rectangle");
   layer.srs = map.srs;
@@ -226,14 +220,10 @@ function demonstrateProjections() {
   }
 
   // Créer une source de données à partir des traits
-  const featureSet = new mapnik.FeatureSet();
-  features.forEach((feature) => {
-    const feat = new mapnik.Feature.fromJSON(JSON.stringify(feature));
-    featureSet.add(feat);
+  const memoryDatasource = new mapnik.Datasource({
+    type: "geojson",
+    inline: JSON.stringify({ type: "FeatureCollection", features }),
   });
-
-  const memoryDatasource = new mapnik.MemoryDatasource();
-  memoryDatasource.add(featureSet);
 
   // Style pour les lignes
   const s = `
