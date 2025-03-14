@@ -1,0 +1,47 @@
+{
+  "basemap": {
+    "description": "Carte de base avec les routes et les bâtiments",
+    "layers": [
+      {
+        "name": "landuse",
+        "db": "landuse_db",
+        "minZoom": 0,
+        "maxZoom": 20,
+        "query": "SELECT geometry, type, name FROM landuse WHERE geometry && ST_MakeEnvelope($minx, $miny, $maxx, $maxy, 3857)"
+      },
+      {
+        "name": "roads",
+        "db": "road_db",
+        "minZoom": 8,
+        "maxZoom": 20,
+        "query": "SELECT geometry, type, name, ref FROM roads WHERE geometry && ST_MakeEnvelope($minx, $miny, $maxx, $maxy, 3857) ORDER BY z_order"
+      },
+      {
+        "name": "buildings",
+        "db": "buildings_db",
+        "minZoom": 13,
+        "maxZoom": 20,
+        "query": "SELECT geometry, name, height FROM buildings WHERE geometry && ST_MakeEnvelope($minx, $miny, $maxx, $maxy, 3857)"
+      }
+    ]
+  },
+  "montreal": {
+    "description": "Carte spécifique de Montréal",
+    "layers": [
+      {
+        "name": "montreal_roads",
+        "db": "main_db",
+        "minZoom": 8,
+        "maxZoom": 20,
+        "query": "SELECT geometry, name, type FROM montreal_roads WHERE geometry && ST_MakeEnvelope($minx, $miny, $maxx, $maxy, 3857)"
+      },
+      {
+        "name": "montreal_buildings",
+        "db": "main_db",
+        "minZoom": 13,
+        "maxZoom": 20,
+        "query": "SELECT geometry, name, height FROM montreal_buildings WHERE geometry && ST_MakeEnvelope($minx, $miny, $maxx, $maxy, 3857)"
+      }
+    ]
+  }
+}

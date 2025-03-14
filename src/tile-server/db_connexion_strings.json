@@ -1,0 +1,6 @@
+{
+  "main_db": "postgresql://user:password@postgres:5432/gis_data",
+  "landuse_db": "postgresql://user:password@postgres:5432/landuse_data",
+  "road_db": "postgresql://user:password@postgres:5432/road_data",
+  "buildings_db": "postgresql://user:password@postgres:5432/buildings_data"
+}
